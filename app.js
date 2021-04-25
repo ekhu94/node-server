@@ -20,9 +20,14 @@ const server = http.createServer((req, res) => {
     return req.on("end", () => {
       const parsedBody = Buffer.concat(body).toString();
       const message = parsedBody.split("=")[1];
-      fs.writeFileSync("./message.txt", message);
-      res.writeHead(302, {
-        Location: "/",
+      fs.writeFile("./message.txt", message, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.writeHead(302, {
+            Location: "/",
+          });
+        }
       });
     });
   }
