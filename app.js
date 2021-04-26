@@ -28,6 +28,7 @@ const server = http.createServer((req, res) => {
           res.writeHead(302, {
             Location: "/",
           });
+          return res.end();
         }
       });
     });
